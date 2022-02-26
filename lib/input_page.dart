@@ -14,78 +14,65 @@ class _InputPageState extends State<InputPage> {
         centerTitle: true,
         title: const Text('BMI CALCULATOR'),
       ),
-      body: Center(
-        child: Column(
-          children: [
-            Expanded(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    margin: const EdgeInsets.all(5),
-                    padding: const EdgeInsets.all(10),
-                    height: 250.0,
-                    width: 130,
+      body: Column(
+        children: [
+          Expanded(
+            child: Row(
+              children: [
+                Expanded(
+                  child: Container(
+                    margin: const EdgeInsets.all(8),
                     decoration: BoxDecoration(
                         color: Colors.red, //Color(0xFF1E1F32),
                         borderRadius: BorderRadius.circular(5)),
                   ),
-                  const SizedBox(
-                    width: 15,
-                  ),
-                  Container(
-                    margin: const EdgeInsets.all(5),
-                    padding: const EdgeInsets.all(10),
-                    height: 250.0,
-                    width: 130,
+                ),
+                Expanded(
+                  child: Container(
+                    margin: const EdgeInsets.all(8),
                     decoration: BoxDecoration(
                         color: Colors.red, //Color(0xFF1E1F32),,
                         borderRadius: BorderRadius.circular(5)),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
-            Expanded(
-              child: Container(
-                margin: const EdgeInsets.all(10),
-                padding: const EdgeInsets.all(10),
-                height: 80.0,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                    color: Colors.red, //Color(0xFF1E1F32),,
-                    borderRadius: BorderRadius.circular(10)),
-              ),
+          ),
+
+          Expanded(
+            child: Container(
+              margin: const EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                  color: Colors.red, //Color(0xFF1E1F32),,
+                  borderRadius: BorderRadius.circular(10)),
             ),
-            Expanded(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    margin: const EdgeInsets.all(5),
-                    padding: const EdgeInsets.all(10),
-                    height: 250.0,
-                    width: 130,
+          ),
+
+          Expanded(
+            child: Row(
+              children: [
+                Expanded(
+                  child: Container(
+                    margin: const EdgeInsets.all(8),
                     decoration: BoxDecoration(
                         color: Colors.red, //Color(0xFF1E1F32),
                         borderRadius: BorderRadius.circular(5)),
                   ),
-                  const SizedBox(
-                    width: 15,
-                  ),
-                  Container(
-                    margin: const EdgeInsets.all(5),
-                    padding: const EdgeInsets.all(10),
-                    height: 250.0,
-                    width: 130,
+                ),
+
+                Expanded(
+                  child: Container(
+                    margin: const EdgeInsets.all(8),
+                  
                     decoration: BoxDecoration(
                         color: Colors.red, //Color(0xFF1E1F32),,
                         borderRadius: BorderRadius.circular(5)),
                   ),
-                ],
-              ),
-            )
-          ],
-        ),
+                ),
+              ],
+            ),
+          )
+        ],
       ),
     );
   }
