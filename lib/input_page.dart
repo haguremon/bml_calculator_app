@@ -3,7 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'reusable_card.dart';
 import 'icon_content.dart';
 
-//NOTE: propertys
+
 const bottomContainerheight = 70.0;
 const activeCardColor = Color(0xFF1E1F32); //複数同じだと一箇所を変えるだけでいいからこうしてる
 const inactiveCardColor = Color(0xFF111328);
