@@ -1,4 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'reusable_card.dart';
+import 'icon_content.dart';
+
+//NOTE: propertys
+const bottomContainerheight = 70.0;
+const activeCardColor = Color(0xFF1E1F32); //複数同じだと一箇所を変えるだけでいいからこうしてる
+const inactiveCardColor = Color(0xFF111328);
+const bottomContainerColor = Color(0xFFEB1455);
+
+enum Gender {
+  male,
+  female,
+}
 
 // ignore: use_key_in_widget_constructors
 class InputPage extends StatefulWidget {
@@ -7,6 +21,22 @@ class InputPage extends StatefulWidget {
 }
 
 class _InputPageState extends State<InputPage> {
+  Color maleCardColor = inactiveCardColor;
+  Color femaleCardColor = inactiveCardColor;
+
+  void updateColor(Gender gender) {
+    switch (gender) {
+      case Gender.male:
+        maleCardColor = activeCardColor;
+        femaleCardColor = inactiveCardColor;
+        break;
+      case Gender.female:
+        femaleCardColor = activeCardColor;
+        maleCardColor = inactiveCardColor;
+        break;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -14,71 +44,77 @@ class _InputPageState extends State<InputPage> {
         centerTitle: true,
         title: const Text('BMI CALCULATOR'),
       ),
-      body: Column(
-        children: [
-          Expanded(
-            child: Row(
-              children:  const [
-                Expanded(
-                  child: ReusableCard(color:Color(0xFF1E1F32)),
+      body: Column(children: [
+        Expanded(
+          child: Row(
+            children: <Widget>[
+              Expanded(
+                child: GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      updateColor(Gender.male);
+                    });
+                  },
+                  child: ReusableCard(
+                    color: maleCardColor,
+                    cardChild: const IconContent(
+                      textTitle: '男性',
+                      iconData: FontAwesomeIcons.mars,
+                    ),
+                  ),
                 ),
-                Expanded(
-                  child: ReusableCard(color: Color(0xFF1E1F32)),
+              ),
+              Expanded(
+                //GestureDetectorでタップの認識ができる
+                child: GestureDetector(
+                  onTap: () {
+                    setState(() {
+                       updateColor(Gender.female);
+                    });
+                  },
+                  child: ReusableCard(
+                      color: femaleCardColor,
+                      cardChild: const IconContent(
+                        textTitle: '女性',
+                        iconData: FontAwesomeIcons.venus,
+                      )),
                 ),
-              ],
+              ),
+            ],
+          ),
+        ),
+        const Expanded(
+          child: ReusableCard(color: activeCardColor),
+        ),
+        Expanded(
+          child: Row(
+            children: const [
+              Expanded(
+                child: ReusableCard(color: activeCardColor),
+              ),
+              Expanded(
+                child: ReusableCard(color: activeCardColor),
+              ),
+            ],
+          ),
+        ),
+        Container(
+          child: const Center(
+            child: Text(
+              '貴方のBMIを計算',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 25,
+              ),
             ),
           ),
-         const  Expanded(
-            child: ReusableCard(color: Color(0xFF1E1F32)),
-          ),
-          Expanded(
-            child: Row(
-              children: const [
-                Expanded(
-                  child: ReusableCard(color:Color(0xFF1E1F32)),
-                ),
-                Expanded(
-                  child: ReusableCard(color:Color(0xFF1E1F32)),
-                ),
-              ],
-            ),
-          )
-        ],
-      ),
+          color: bottomContainerColor,
+          margin: const EdgeInsets.only(top: 10),
+          width: double.infinity,
+          height: bottomContainerheight,
+        )
+      ]),
     );
   }
 }
-
-//oopの醍醐味再利用できるの最高　//Extract Widgetでする事ができる
-// ignore: use_key_in_widget_constructors,
-class ReusableCard extends StatelessWidget {
-  final Color color;
-// required: 関数（メソッド）やコンストラクタで設定する引数（パラメータ）で、必ず値を入れる必要があるもの nullを許さない？
-  // ignore: use_key_in_widget_constructors
-  const ReusableCard ({required this.color});
- 
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.all(8),
-      decoration: BoxDecoration(
-          // ignore: unnecessary_this
-          color: this.color, 
-          borderRadius: BorderRadius.circular(5)),
-    );
-  }
-}
-
-
-
-
-//  //任意のwidgetにもThemeを付ける事ができる
-//       floatingActionButton: Theme(
-//         data: ThemeData( floatingActionButtonTheme: const FloatingActionButtonThemeData(backgroundColor: Colors.green),  ),
-//         child: FloatingActionButton(
-//           onPressed: () {
-//             print('tap');
-//           },
-//           child: const Icon(Icons.add),
-//         ),
-//       ),
