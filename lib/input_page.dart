@@ -3,7 +3,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'reusable_card.dart';
 import 'icon_content.dart';
 
-
 const bottomContainerheight = 70.0;
 const activeCardColor = Color(0xFF1E1F32); //複数同じだと一箇所を変えるだけでいいからこうしてる
 const inactiveCardColor = Color(0xFF111328);
@@ -21,21 +20,30 @@ class InputPage extends StatefulWidget {
 }
 
 class _InputPageState extends State<InputPage> {
-  Color maleCardColor = inactiveCardColor;
-  Color femaleCardColor = inactiveCardColor;
+  // Color maleCardColor = inactiveCardColor;
+  // Color femaleCardColor = inactiveCardColor;
 
-  void updateColor(Gender gender) {
-    switch (gender) {
-      case Gender.male:
-        maleCardColor = activeCardColor;
-        femaleCardColor = inactiveCardColor;
-        break;
-      case Gender.female:
-        femaleCardColor = activeCardColor;
-        maleCardColor = inactiveCardColor;
-        break;
-    }
-  }
+  Gender? selectedGender;
+
+  // void updateColor(Gender gender) {
+  //   _maleCardColor =
+  //       gender == Gender.male ? activeCardColor : inactiveCardColor;
+
+  //   _femaleCardColor =
+  //       gender == Gender.female ? activeCardColor : inactiveCardColor;
+
+  //   //三項演算子よりはswitchの方が好きだけどね。。。
+  //   // switch (gender) {
+  //   //   case Gender.male:
+  //   //     maleCardColor = activeCardColor;
+  //   //     femaleCardColor = inactiveCardColor;
+  //   //     break;
+  //   //   case Gender.female:
+  //   //     femaleCardColor = activeCardColor;
+  //   //     maleCardColor = inactiveCardColor;
+  //   //     break;
+  //   // }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -49,36 +57,32 @@ class _InputPageState extends State<InputPage> {
           child: Row(
             children: <Widget>[
               Expanded(
-                child: GestureDetector(
-                  onTap: () {
+                child: ReusableCard(
+                  onPress: (){
                     setState(() {
-                      updateColor(Gender.male);
+                       selectedGender = Gender.male;
                     });
                   },
-                  child: ReusableCard(
-                    color: maleCardColor,
+                    color:  selectedGender == Gender.male ?   activeCardColor : inactiveCardColor,
                     cardChild: const IconContent(
                       textTitle: '男性',
                       iconData: FontAwesomeIcons.mars,
                     ),
                   ),
-                ),
               ),
               Expanded(
-                //GestureDetectorでタップの認識ができる
-                child: GestureDetector(
-                  onTap: () {
+                //GestureDetectorをReusableCardの方に埋め込む事によって見やすくなった Functionクラスを引数として使える
+                child: ReusableCard(
+                  onPress: (){
                     setState(() {
-                       updateColor(Gender.female);
+                       selectedGender = Gender.male;
                     });
                   },
-                  child: ReusableCard(
-                      color: femaleCardColor,
-                      cardChild: const IconContent(
-                        textTitle: '女性',
-                        iconData: FontAwesomeIcons.venus,
-                      )),
-                ),
+                    color: selectedGender == Gender.female ?   activeCardColor : inactiveCardColor,
+                    cardChild: const IconContent(
+                      textTitle: '女性',
+                      iconData: FontAwesomeIcons.venus,
+                    )),
               ),
             ],
           ),
