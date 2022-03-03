@@ -2,11 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'reusable_card.dart';
 import 'icon_content.dart';
-
-const bottomContainerheight = 70.0;
-const activeCardColor = Color(0xFF1E1F32); //複数同じだと一箇所を変えるだけでいいからこうしてる
-const inactiveCardColor = Color(0xFF111328);
-const bottomContainerColor = Color(0xFFEB1455);
+import 'consts.dart';
 
 enum Gender {
   male,
@@ -20,30 +16,8 @@ class InputPage extends StatefulWidget {
 }
 
 class _InputPageState extends State<InputPage> {
-  // Color maleCardColor = inactiveCardColor;
-  // Color femaleCardColor = inactiveCardColor;
-
-  Gender? selectedGender;
-
-  // void updateColor(Gender gender) {
-  //   _maleCardColor =
-  //       gender == Gender.male ? activeCardColor : inactiveCardColor;
-
-  //   _femaleCardColor =
-  //       gender == Gender.female ? activeCardColor : inactiveCardColor;
-
-  //   //三項演算子よりはswitchの方が好きだけどね。。。
-  //   // switch (gender) {
-  //   //   case Gender.male:
-  //   //     maleCardColor = activeCardColor;
-  //   //     femaleCardColor = inactiveCardColor;
-  //   //     break;
-  //   //   case Gender.female:
-  //   //     femaleCardColor = activeCardColor;
-  //   //     maleCardColor = inactiveCardColor;
-  //   //     break;
-  //   // }
-  // }
+  Gender? _selectedGender;
+  int _height = 170;
 
   @override
   Widget build(BuildContext context) {
@@ -52,33 +26,41 @@ class _InputPageState extends State<InputPage> {
         centerTitle: true,
         title: const Text('BMI CALCULATOR'),
       ),
-      body: Column(children: [
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+    
+        
+         children: [
         Expanded(
           child: Row(
             children: <Widget>[
               Expanded(
                 child: ReusableCard(
-                  onPress: (){
+                  onPress: () {
                     setState(() {
-                       selectedGender = Gender.male;
+                      _selectedGender = Gender.male;
                     });
                   },
-                    color:  selectedGender == Gender.male ?   activeCardColor : inactiveCardColor,
-                    cardChild: const IconContent(
-                      textTitle: '男性',
-                      iconData: FontAwesomeIcons.mars,
-                    ),
+                  color: _selectedGender == Gender.male
+                      ? kActiveCardColor
+                      : kInactiveCardColor,
+                  cardChild: const IconContent(
+                    textTitle: '男性',
+                    iconData: FontAwesomeIcons.mars,
                   ),
+                ),
               ),
               Expanded(
                 //GestureDetectorをReusableCardの方に埋め込む事によって見やすくなった Functionクラスを引数として使える
                 child: ReusableCard(
-                  onPress: (){
-                    setState(() {
-                       selectedGender = Gender.male;
-                    });
-                  },
-                    color: selectedGender == Gender.female ?   activeCardColor : inactiveCardColor,
+                    onPress: () {
+                      setState(() {
+                        _selectedGender = Gender.male;
+                      });
+                    },
+                    color: _selectedGender == Gender.female
+                        ? kActiveCardColor
+                        : kInactiveCardColor,
                     cardChild: const IconContent(
                       textTitle: '女性',
                       iconData: FontAwesomeIcons.venus,
@@ -87,17 +69,79 @@ class _InputPageState extends State<InputPage> {
             ],
           ),
         ),
-        const Expanded(
-          child: ReusableCard(color: activeCardColor),
+        Expanded(
+          child: ReusableCard(
+            color: kActiveCardColor,
+            cardChild: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  const Expanded(
+                     child: Text(
+                      
+                      'HEIGHT',
+                      style: kLabelTextStyle,
+                                     ),
+                   ),
+                  Expanded(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.baseline,
+                      textBaseline: TextBaseline.alphabetic, //ベースラインを揃えるだけ
+                      children: <Widget>[
+                        Text(
+                          _height.toString(),
+                          style: kNumberTextStyle,
+                        ),
+                        const Text(
+                          'cm',
+                          style: kLabelTextStyle,
+                        ),
+                      ],
+                    ),
+                  ),
+                  Expanded(
+                    //特定のコンポーネントにThemeを指定
+                    child: SliderTheme(
+                      data:SliderTheme.of(context).copyWith(
+                        trackHeight: 2.5,
+                        activeTrackColor:Colors.white,
+                        inactiveTrackColor: const Color.fromARGB(119, 158, 158, 158),
+                        thumbShape: const RoundSliderThumbShape(
+                          enabledThumbRadius: 7,
+                        ),
+                         thumbColor: Colors.red,
+
+                        overlayShape: const RoundSliderOverlayShape(
+                          overlayRadius: 14,
+                        ),
+                      overlayColor: const Color.fromARGB(91, 244, 67, 54),
+
+                      ),
+                      child: Slider(
+                        min: 0,
+                        max: 300,
+                        value: _height.toDouble(),
+                        onChanged: (double newValue) {
+                          setState(() {
+                            _height = newValue.round();
+                          });
+                        },
+                       
+                        
+                      ),
+                    ),
+                  )
+                ]),
+          ),
         ),
         Expanded(
           child: Row(
             children: const [
               Expanded(
-                child: ReusableCard(color: activeCardColor),
+                child: ReusableCard(color: kActiveCardColor),
               ),
               Expanded(
-                child: ReusableCard(color: activeCardColor),
+                child: ReusableCard(color: kActiveCardColor),
               ),
             ],
           ),
@@ -113,10 +157,10 @@ class _InputPageState extends State<InputPage> {
               ),
             ),
           ),
-          color: bottomContainerColor,
+          color: kBottomContainerColor,
           margin: const EdgeInsets.only(top: 10),
           width: double.infinity,
-          height: bottomContainerheight,
+          height: kBottomContainerheight,
         )
       ]),
     );

@@ -17,6 +17,25 @@ class BMICalculator extends StatelessWidget {
         //  textTheme: const TextTheme(
         //    bodyText2: TextStyle(color: Colors.white) //ダークモードなのでテキストの色を変更しなくてもいい
         //    ),
+        /*//sliderのテーマが統一できる
+              sliderTheme: SliderTheme.of(context).copyWith(
+                        trackHeight: 2.5,
+                        activeTrackColor:Colors.white,
+                        inactiveTrackColor: const Color.fromARGB(119, 158, 158, 158),
+                        thumbShape: const RoundSliderThumbShape(
+                          enabledThumbRadius: 7,
+                        ),
+                         thumbColor: Colors.red,
+
+                        overlayShape: const RoundSliderOverlayShape(
+                          overlayRadius: 14,
+                        ),
+                      overlayColor: const Color.fromARGB(91, 244, 67, 54),
+
+                      ),
+      
+        */
+  
       ),
       home: InputPage(),
     );

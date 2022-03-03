@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-//コンポーネントで独立性があるって認識
-const TextStyle _textTitleTextStyle = TextStyle(
-  fontSize: 18,
-   color: Color(0xFF8D8E98)
-  );
+import 'consts.dart';
+
 // ignore: use_key_in_widget_constructors
 class IconContent extends StatelessWidget {
   final String textTitle;
@@ -24,7 +21,7 @@ class IconContent extends StatelessWidget {
         const SizedBox(height: 8),
         Text(
           textTitle,
-          style:  _textTitleTextStyle,
+          style:  kLabelTextStyle,
         ),
       ],
     );
