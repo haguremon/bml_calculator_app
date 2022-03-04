@@ -18,6 +18,8 @@ class InputPage extends StatefulWidget {
 class _InputPageState extends State<InputPage> {
   Gender? _selectedGender;
   int _height = 170;
+  int _weight = 80;
+  int _age = 24;
 
   @override
   Widget build(BuildContext context) {
@@ -26,11 +28,7 @@ class _InputPageState extends State<InputPage> {
         centerTitle: true,
         title: const Text('BMI CALCULATOR'),
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-    
-        
-         children: [
+      body: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
         Expanded(
           child: Row(
             children: <Widget>[
@@ -55,7 +53,7 @@ class _InputPageState extends State<InputPage> {
                 child: ReusableCard(
                     onPress: () {
                       setState(() {
-                        _selectedGender = Gender.male;
+                        _selectedGender = Gender.female;
                       });
                     },
                     color: _selectedGender == Gender.female
@@ -75,60 +73,49 @@ class _InputPageState extends State<InputPage> {
             cardChild: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  const Expanded(
-                     child: Text(
-                      
-                      'HEIGHT',
-                      style: kLabelTextStyle,
-                                     ),
-                   ),
-                  Expanded(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.baseline,
-                      textBaseline: TextBaseline.alphabetic, //ベースラインを揃えるだけ
-                      children: <Widget>[
-                        Text(
-                          _height.toString(),
-                          style: kNumberTextStyle,
-                        ),
-                        const Text(
-                          'cm',
-                          style: kLabelTextStyle,
-                        ),
-                      ],
-                    ),
+                  const Text(
+                    'HEIGHT',
+                    style: kLabelTextStyle,
                   ),
-                  Expanded(
-                    //特定のコンポーネントにThemeを指定
-                    child: SliderTheme(
-                      data:SliderTheme.of(context).copyWith(
-                        trackHeight: 2.5,
-                        activeTrackColor:Colors.white,
-                        inactiveTrackColor: const Color.fromARGB(119, 158, 158, 158),
-                        thumbShape: const RoundSliderThumbShape(
-                          enabledThumbRadius: 7,
-                        ),
-                         thumbColor: Colors.red,
-
-                        overlayShape: const RoundSliderOverlayShape(
-                          overlayRadius: 14,
-                        ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.baseline,
+                    textBaseline: TextBaseline.alphabetic, //ベースラインを揃えるだけ
+                    children: <Widget>[
+                      Text(
+                        _height.toString(),
+                        style: kNumberTextStyle,
+                      ),
+                      const Text(
+                        'cm',
+                        style: kLabelTextStyle,
+                      ),
+                    ],
+                  ),
+                  SliderTheme(
+                    data: SliderTheme.of(context).copyWith(
+                      trackHeight: 2.5,
+                      activeTrackColor: Colors.white,
+                      inactiveTrackColor:
+                          const Color.fromARGB(119, 158, 158, 158),
+                      thumbShape: const RoundSliderThumbShape(
+                        enabledThumbRadius: 7,
+                      ),
+                      thumbColor: Colors.red,
+                      overlayShape: const RoundSliderOverlayShape(
+                        overlayRadius: 14,
+                      ),
                       overlayColor: const Color.fromARGB(91, 244, 67, 54),
-
-                      ),
-                      child: Slider(
-                        min: 0,
-                        max: 300,
-                        value: _height.toDouble(),
-                        onChanged: (double newValue) {
-                          setState(() {
-                            _height = newValue.round();
-                          });
-                        },
-                       
-                        
-                      ),
+                    ),
+                    child: Slider(
+                      min: 0,
+                      max: 300,
+                      value: _height.toDouble(),
+                      onChanged: (double newValue) {
+                        setState(() {
+                          _height = newValue.round();
+                        });
+                      },
                     ),
                   )
                 ]),
@@ -136,12 +123,94 @@ class _InputPageState extends State<InputPage> {
         ),
         Expanded(
           child: Row(
-            children: const [
+            children: [
               Expanded(
-                child: ReusableCard(color: kActiveCardColor),
+                child: ReusableCard(
+                  color: kActiveCardColor,
+                  cardChild: SingleChildScrollView(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        const Text(
+                          'WEIGHT',
+                          style: kLabelTextStyle,
+                        ),
+                        Text(
+                          _weight.toString(),
+                          style: kNumberTextStyle,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            RoundIconButton(
+                              icon: kIconMinus,
+                              onTap: () {
+                                setState(() {
+                                  _weight--;
+                                });
+                              },
+                            ),
+                            SizedBox(
+                              width: 5,
+                            ),
+                            RoundIconButton(
+                              icon: kIconPlus,
+                              onTap: () {
+                                setState(() {
+                                  _weight++;
+                                });
+                              },
+                            )
+                          ],
+                        )
+                      ],
+                    ),
+                  ),
+                ),
               ),
               Expanded(
-                child: ReusableCard(color: kActiveCardColor),
+                child: ReusableCard(
+                  color: kActiveCardColor,
+                  cardChild: SingleChildScrollView(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        const Text(
+                          'AGE',
+                          style: kLabelTextStyle,
+                        ),
+                        Text(
+                          _age.toString(),
+                          style: kNumberTextStyle,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            RoundIconButton(
+                              icon: kIconMinus,
+                              onTap: () {
+                                setState(() {
+                                  _age--;
+                                });
+                              },
+                            ),
+                            const SizedBox(
+                              width: 5,
+                            ),
+                            RoundIconButton(
+                              icon: kIconPlus,
+                              onTap: () {
+                                setState(() {
+                                  _age++;
+                                });
+                              },
+                            )
+                          ],
+                        )
+                      ],
+                    ),
+                  ),
+                ),
               ),
             ],
           ),
@@ -163,6 +232,28 @@ class _InputPageState extends State<InputPage> {
           height: kBottomContainerheight,
         )
       ]),
+    );
+  }
+}
+
+class RoundIconButton extends StatelessWidget {
+  final Icon icon;
+  final VoidCallback onTap;
+
+  // ignore: use_key_in_widget_constructors
+  const RoundIconButton({required this.icon, required this.onTap});
+
+  @override
+  Widget build(BuildContext context) {
+    return RawMaterialButton(
+      child: icon,
+      onPressed: onTap,
+     constraints: const BoxConstraints.tightFor(
+        width: 56,
+        height: 56,
+      ),
+      shape: const CircleBorder(),
+      fillColor: kInactiveCardColor,
     );
   }
 }
