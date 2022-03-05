@@ -9,16 +9,27 @@ const kInactiveCardColor = Color(0xFF111328);
 const kBottomContainerColor = Color(0xFFEB1455);
 
 const TextStyle kLabelTextStyle =
-    TextStyle(fontSize: 20, color: Color(0xFF8D8E98));
+    TextStyle(
+      fontSize: 20,
+      color: Color(0xFF8D8E98),
+      );
 
 const TextStyle kNumberTextStyle =
-    TextStyle(fontSize: 40, fontWeight: FontWeight.w700);
+    TextStyle(
+      fontSize: 40,
+      fontWeight: FontWeight.w700,
+      );
 
 const kIconMinus = Icon(
   FontAwesomeIcons.minus,
   color: Colors.white,
 );
-const kIconPlus= Icon(
+const kIconPlus = Icon(
   FontAwesomeIcons.plus,
-   color: Colors.white,
+  color: Colors.white,
+);
+
+const kLargeTextStlyle = TextStyle(
+  fontWeight: FontWeight.bold,
+  fontSize: 25,
 );

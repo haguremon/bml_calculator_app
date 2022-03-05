@@ -1,5 +1,7 @@
+import 'package:bml_calculator_app/bottom_reusable_card.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'results_page.dart';
 import 'reusable_card.dart';
 import 'icon_content.dart';
 import 'consts.dart';
@@ -127,133 +129,71 @@ class _InputPageState extends State<InputPage> {
               Expanded(
                 child: ReusableCard(
                   color: kActiveCardColor,
-                  cardChild: SingleChildScrollView(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        const Text(
-                          'WEIGHT',
-                          style: kLabelTextStyle,
-                        ),
-                        Text(
-                          _weight.toString(),
-                          style: kNumberTextStyle,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            RoundIconButton(
-                              icon: kIconMinus,
-                              onTap: () {
-                                setState(() {
-                                  _weight--;
-                                });
-                              },
-                            ),
-                            SizedBox(
-                              width: 5,
-                            ),
-                            RoundIconButton(
-                              icon: kIconPlus,
-                              onTap: () {
-                                setState(() {
-                                  _weight++;
-                                });
-                              },
-                            )
-                          ],
-                        )
-                      ],
-                    ),
+                  cardChild: BottomReusableCard(
+                    labelText: 'WEIGHT',
+                    number: _weight,
+                    iconMinus: kIconMinus,
+                    iconAdd: kIconPlus,
+                    tappedToIncrease: () {
+                      setState(() {
+                        _weight--;
+                      });
+                    },
+                    tappedToDecrease: () {
+                      setState(() {
+                        _weight++;
+                      });
+                    },
                   ),
                 ),
               ),
               Expanded(
                 child: ReusableCard(
                   color: kActiveCardColor,
-                  cardChild: SingleChildScrollView(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        const Text(
-                          'AGE',
-                          style: kLabelTextStyle,
-                        ),
-                        Text(
-                          _age.toString(),
-                          style: kNumberTextStyle,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            RoundIconButton(
-                              icon: kIconMinus,
-                              onTap: () {
-                                setState(() {
-                                  _age--;
-                                });
-                              },
-                            ),
-                            const SizedBox(
-                              width: 5,
-                            ),
-                            RoundIconButton(
-                              icon: kIconPlus,
-                              onTap: () {
-                                setState(() {
-                                  _age++;
-                                });
-                              },
-                            )
-                          ],
-                        )
-                      ],
-                    ),
+                  cardChild: BottomReusableCard(
+                    labelText: 'AGE',
+                    number: _age,
+                    iconMinus: kIconMinus,
+                    iconAdd: kIconPlus,
+                    tappedToIncrease: () {
+                      setState(() {
+                        _age--;
+                      });
+                    },
+                    tappedToDecrease: () {
+                      setState(() {
+                        _age++;
+                      });
+                    },
                   ),
                 ),
               ),
             ],
           ),
         ),
-        Container(
-          child: const Center(
-            child: Text(
-              '貴方のBMIを計算',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 25,
+        GestureDetector(
+          onTap: () {
+            Navigator.push(
+              context, 
+              MaterialPageRoute(builder: (context) => ResultsPage())
+            );
+          },
+          child: Container(
+            child: const Center(
+              child: Text(
+                '貴方のBMIを計算',
+                textAlign: TextAlign.center,
+                style: kLargeTextStlyle,
               ),
             ),
+            color: kBottomContainerColor,
+            margin: const EdgeInsets.only(top: 10),
+            padding: const EdgeInsets.only(bottom: 5),
+            width: double.infinity,
+            height: kBottomContainerheight,
           ),
-          color: kBottomContainerColor,
-          margin: const EdgeInsets.only(top: 10),
-          width: double.infinity,
-          height: kBottomContainerheight,
         )
       ]),
-    );
-  }
-}
-
-class RoundIconButton extends StatelessWidget {
-  final Icon icon;
-  final VoidCallback onTap;
-
-  // ignore: use_key_in_widget_constructors
-  const RoundIconButton({required this.icon, required this.onTap});
-
-  @override
-  Widget build(BuildContext context) {
-    return RawMaterialButton(
-      child: icon,
-      onPressed: onTap,
-     constraints: const BoxConstraints.tightFor(
-        width: 56,
-        height: 56,
-      ),
-      shape: const CircleBorder(),
-      fillColor: kInactiveCardColor,
     );
   }
 }

@@ -12,7 +12,9 @@ class BMICalculator extends StatelessWidget {
     return MaterialApp(
       //themeを指定することで統一のあるデザインにする事ができる
       theme: ThemeData.dark().copyWith(
-        appBarTheme: const AppBarTheme(backgroundColor: Color(0xFF090E22)),
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Color(0xFF090E22),
+          ),
          scaffoldBackgroundColor: const Color(0xff090D22),
       ),
       home: InputPage(),
