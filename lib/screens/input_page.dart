@@ -1,10 +1,12 @@
-import 'package:bml_calculator_app/bottom_reusable_card.dart';
+import 'package:bml_calculator_app/components/bottom_reusable_card.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import '../components/bottom_content.dart';
 import 'results_page.dart';
-import 'reusable_card.dart';
-import 'icon_content.dart';
-import 'consts.dart';
+import '../components/reusable_card.dart';
+import '../components/icon_content.dart';
+import '../consts.dart';
+import 'package:bml_calculator_app/bmi_calculator_brain.dart';
 
 enum Gender {
   male,
@@ -134,12 +136,12 @@ class _InputPageState extends State<InputPage> {
                     number: _weight,
                     iconMinus: kIconMinus,
                     iconAdd: kIconPlus,
-                    tappedToIncrease: () {
+                    tappedToDecrease: () {
                       setState(() {
                         _weight--;
                       });
                     },
-                    tappedToDecrease: () {
+                    tappedToIncrease: () {
                       setState(() {
                         _weight++;
                       });
@@ -155,12 +157,12 @@ class _InputPageState extends State<InputPage> {
                     number: _age,
                     iconMinus: kIconMinus,
                     iconAdd: kIconPlus,
-                    tappedToIncrease: () {
+                    tappedToDecrease: () {
                       setState(() {
                         _age--;
                       });
                     },
-                    tappedToDecrease: () {
+                    tappedToIncrease: () {
                       setState(() {
                         _age++;
                       });
@@ -171,27 +173,23 @@ class _InputPageState extends State<InputPage> {
             ],
           ),
         ),
-        GestureDetector(
+        BottomContent(
+          bottomtitleLabel: 'あなたのBMI',
           onTap: () {
+            BMICalculatorBranin calc =
+                BMICalculatorBranin(
+                 height: _height,
+                 weight: _weight,
+                );
+
             Navigator.push(
-              context, 
-              MaterialPageRoute(builder: (context) => ResultsPage())
+              context,
+              MaterialPageRoute(builder: (context) => ResultsPage(
+                bmiResult: calc.calculateBMI(),
+                resultAndBody: calc.getResultBody(),
+              )),
             );
           },
-          child: Container(
-            child: const Center(
-              child: Text(
-                '貴方のBMIを計算',
-                textAlign: TextAlign.center,
-                style: kLargeTextStlyle,
-              ),
-            ),
-            color: kBottomContainerColor,
-            margin: const EdgeInsets.only(top: 10),
-            padding: const EdgeInsets.only(bottom: 5),
-            width: double.infinity,
-            height: kBottomContainerheight,
-          ),
         )
       ]),
     );

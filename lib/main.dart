@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'input_page.dart'; //別ファイルの情報をimportできる//リファクタリング
+import 'screens/input_page.dart'; //別ファイルの情報をimportできる//リファクタリング
 /*
 個々のコンポーネントを個別の Dart ファイルに分割するがいいらしい一つのファイルに大量のコートを書くと見ずらいからね
 */

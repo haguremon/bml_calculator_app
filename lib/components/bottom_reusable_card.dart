@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'consts.dart';
+import '../consts.dart';
 
 //自分で作って見たクラス
 
@@ -8,8 +8,9 @@ class BottomReusableCard extends StatelessWidget {
   final int number;
   final Icon iconMinus;
   final Icon iconAdd;
-  final VoidCallback tappedToIncrease;
   final VoidCallback tappedToDecrease;
+  final VoidCallback tappedToIncrease;
+ 
 
   // ignore: use_key_in_widget_constructors
   const BottomReusableCard(
@@ -17,8 +18,8 @@ class BottomReusableCard extends StatelessWidget {
       required this.number,
       required this.iconMinus,
       required this.iconAdd,
-      required this.tappedToIncrease,
-      required this.tappedToDecrease});
+      required this.tappedToDecrease,
+      required this.tappedToIncrease});
 
   @override
   Widget build(BuildContext context) {
@@ -39,14 +40,14 @@ class BottomReusableCard extends StatelessWidget {
             children: [
               RoundIconButton(
                 icon: iconMinus,
-                onTap: tappedToIncrease,
+                onTap: tappedToDecrease,
               ),
               const SizedBox(
                 width: 5,
               ),
               RoundIconButton(
                 icon: iconAdd,
-                onTap: tappedToDecrease, 
+                onTap: tappedToIncrease, 
                 )
             ],
           )
