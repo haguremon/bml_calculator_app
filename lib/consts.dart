@@ -22,6 +22,7 @@ const kIconMinus = Icon(
   FontAwesomeIcons.minus,
   color: Colors.white,
 );
+
 const kIconPlus = Icon(
   FontAwesomeIcons.plus,
   color: Colors.white,
@@ -36,7 +37,6 @@ const kresultTextStyle = TextStyle(
     color: Color.fromARGB(255, 84, 177, 87),
     fontWeight: FontWeight.bold,
     fontSize: 18
-
 );
 
 const kBMITextStyle = TextStyle(

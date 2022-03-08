@@ -10,16 +10,16 @@ class BottomReusableCard extends StatelessWidget {
   final Icon iconAdd;
   final VoidCallback tappedToDecrease;
   final VoidCallback tappedToIncrease;
- 
 
   // ignore: use_key_in_widget_constructors
-  const BottomReusableCard(
-      {required this.labelText,
+  const BottomReusableCard({
+      required this.labelText,
       required this.number,
       required this.iconMinus,
       required this.iconAdd,
       required this.tappedToDecrease,
-      required this.tappedToIncrease});
+      required this.tappedToIncrease
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -47,8 +47,8 @@ class BottomReusableCard extends StatelessWidget {
               ),
               RoundIconButton(
                 icon: iconAdd,
-                onTap: tappedToIncrease, 
-                )
+                onTap: tappedToIncrease,
+              )
             ],
           )
         ],
@@ -62,17 +62,14 @@ class RoundIconButton extends StatelessWidget {
   final VoidCallback onTap;
 
   // ignore: use_key_in_widget_constructors
-  const RoundIconButton({
-    required this.icon,
-    required this.onTap
-    });
+  const RoundIconButton({required this.icon, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
     return RawMaterialButton(
       child: icon,
       onPressed: onTap,
-     constraints: const BoxConstraints.tightFor(
+      constraints: const BoxConstraints.tightFor(
         width: 56,
         height: 56,
       ),

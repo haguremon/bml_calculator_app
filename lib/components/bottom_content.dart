@@ -6,10 +6,7 @@ class BottomContent extends StatelessWidget {
   final GestureTapCallback? onTap;
 
 // ignore: use_key_in_widget_constructors
-  const BottomContent({
-    required this.bottomtitleLabel,
-    required this.onTap
-     });
+  const BottomContent({required this.bottomtitleLabel, required this.onTap});
 
   @override
   Widget build(BuildContext context) {

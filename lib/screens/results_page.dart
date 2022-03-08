@@ -11,10 +11,7 @@ class ResultsPage extends StatelessWidget {
   final Map<BodyMassIndex, String> resultAndBody;
 
   // ignore: use_key_in_widget_constructors
-  const ResultsPage({
-    required this.bmiResult,
-    required this.resultAndBody
-  });
+  const ResultsPage({required this.bmiResult, required this.resultAndBody});
 
   @override
   Widget build(BuildContext context) {

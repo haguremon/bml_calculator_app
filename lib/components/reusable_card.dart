@@ -8,11 +8,7 @@ class ReusableCard extends StatelessWidget {
   final VoidCallback? onPress; //void Function()?
 // required: 関数（メソッド）やコンストラクタで設定する引数（パラメータ）で、必ず値を入れる必要があるもの nullを許さない？
   // ignore: use_key_in_widget_constructors
-  const ReusableCard({
-    required this.color,
-             this.cardChild,
-             this.onPress
-      });
+  const ReusableCard({required this.color, this.cardChild, this.onPress});
 
   @override
   Widget build(BuildContext context) {
